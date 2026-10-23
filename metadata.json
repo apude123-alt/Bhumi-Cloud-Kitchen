@@ -1,0 +1,6 @@
+{
+  "name": "Bhumi Cloud Kitchen",
+  "description": "Authentic Homestyle Feast online ordering, live menu, dynamic coupons, real-time order tracking, and customer support for www.bhumicloudkitchen.com.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

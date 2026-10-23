@@ -1,0 +1,167 @@
+{
+  "entities": {
+    "MenuItem": {
+      "title": "MenuItem",
+      "description": "A food dish offered by Bhumi Cloud Kitchen",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the dish"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the dish"
+        },
+        "category": {
+          "type": "string",
+          "description": "Primary category (e.g. Lunch, Dinner, Breakfast)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of ingredients and flavor profile"
+        },
+        "price": {
+          "type": "number",
+          "description": "Selling price in INR"
+        },
+        "originalPrice": {
+          "type": "number",
+          "description": "Original MRP price in INR"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Image URL of the food dish"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Customer average rating"
+        },
+        "dietary": {
+          "type": "string",
+          "enum": ["veg", "non-veg"],
+          "description": "Vegetarian or non-vegetarian indicator"
+        },
+        "portion": {
+          "type": "string",
+          "description": "Portion size description"
+        },
+        "isAvailable": {
+          "type": "boolean",
+          "description": "Whether the dish is in stock"
+        },
+        "spiceLevel": {
+          "type": "string",
+          "enum": ["Mild", "Medium", "Spicy"],
+          "description": "Spice intensity"
+        }
+      },
+      "required": ["id", "name", "category", "price", "imageUrl"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A food delivery order placed by a customer",
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "description": "Unique Order ID (e.g. BK-4-XXXX)"
+        },
+        "customerId": {
+          "type": "string",
+          "description": "Customer identifier"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Customer full name"
+        },
+        "customerPhone": {
+          "type": "string",
+          "description": "Customer contact mobile number"
+        },
+        "deliveryAddress": {
+          "type": "string",
+          "description": "Delivery address and landmark"
+        },
+        "subtotal": {
+          "type": "number",
+          "description": "Subtotal before discount and delivery"
+        },
+        "deliveryCharge": {
+          "type": "number",
+          "description": "Delivery fee"
+        },
+        "totalAmount": {
+          "type": "number",
+          "description": "Grand total payable"
+        },
+        "orderStatus": {
+          "type": "string",
+          "enum": ["ORDER_PLACED", "PREPARING", "OUT_FOR_DELIVERY", "DELIVERED", "CANCELLED"],
+          "description": "Current order fulfillment state"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "description": "Cash on Delivery or UPI / Online"
+        },
+        "createdAt": {
+          "type": "number",
+          "description": "Timestamp in milliseconds"
+        },
+        "restaurantId": {
+          "type": "string",
+          "description": "Identifier for Bhumi Kitchen branch"
+        }
+      },
+      "required": ["orderId", "customerName", "customerPhone", "deliveryAddress", "totalAmount", "orderStatus"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Customer account profile",
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "string",
+          "description": "Verified mobile phone number"
+        },
+        "name": {
+          "type": "string",
+          "description": "Customer name"
+        },
+        "savedAddress": {
+          "type": "string",
+          "description": "Saved delivery address"
+        },
+        "isLoggedIn": {
+          "type": "boolean",
+          "description": "Authentication status"
+        },
+        "loggedInAt": {
+          "type": "number",
+          "description": "Last login timestamp"
+        }
+      },
+      "required": ["phone"]
+    }
+  },
+  "firestore": {
+    "/menuItems/{itemId}": {
+      "schema": {
+        "$ref": "#/entities/MenuItem"
+      },
+      "description": "Collection of dishes and combos available for ordering"
+    },
+    "/orders/{orderId}": {
+      "schema": {
+        "$ref": "#/entities/Order"
+      },
+      "description": "Customer orders and live fulfillment status"
+    },
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "Registered customer profiles and saved preferences"
+    }
+  }
+}
